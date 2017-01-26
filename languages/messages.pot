@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit 1.0.11 (jebster/events, messages)\n"
+"POT-Creation-Date: 2017-01-26 22:00+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "No future events"
+msgstr ""
+
+msgid "%hourMinute%"
+msgstr ""
+
+msgid "at %location%"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "More"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Max events in list"
+msgstr ""
+
+msgid "Add Event"
+msgstr ""
+
+msgid "Edit %event%"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Published"
+msgstr ""
+
+msgid "Saved."
+msgstr ""
+
+msgid "Deleted."
+msgstr ""
+
+msgid "Something went wrong, please contact support."
+msgstr ""
+
+msgid "Event Settings"
+msgstr ""
+
+msgid "Events"
+msgstr ""
+
+msgid "New event"
+msgstr ""
+
