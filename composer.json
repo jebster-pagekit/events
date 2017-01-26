@@ -1,0 +1,18 @@
+{
+  "name": "jebster/events",
+  "version": "0.4",
+  "type": "pagekit-extension",
+  "title": "Events",
+  "description": "Show events of all kind on website with calendar widgets",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jógvan Olsen",
+      "email": "jo@jebster.net",
+      "homepage": "http://jebster.net"
+    }
+  ],
+  "extra": {
+    "scripts": "scripts.php"
+  }
+}
