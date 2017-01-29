@@ -1,4 +1,4 @@
-<?php $view->script('event', 'events:js/events-edit.js', ['vue', 'editor', 'uikit']) ?>
+<?php $view->script('event', 'events:js/events-edit.js', ['vue', 'vue-router', 'VueRouter', 'editor', 'uikit']) ?>
 
 <div id="event" class="uk-form" v-cloak>
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
@@ -8,11 +8,37 @@
             <h2 class="uk-margin-remove" v-else>{{ 'Add Event' | trans }}</h2>
 
         </div>
-        <div data-uk-margin>
 
+
+        <div id="delete-popup" class="uk-modal" >
+            <div class="uk-modal-dialog">
+                <button type="button" class="uk-modal-close uk-close"></button>
+                <div class="uk-modal-header">
+                    <h1>
+                        {{ 'Delete \'%event%\' ?' | trans {'event':event.title} }}
+                    </h1>
+                </div>
+                <p>
+                    {{ 'Are you sure you want to delete this event? You won\'t be able to recover it.' | trans }}
+                </p>
+                <div class="uk-modal-footer uk-text-right">
+<!--                    <button class="uk-button uk-button-primary">-->
+<!--                        {{ 'Close' | trans }}-->
+<!--                    </button>-->
+                    <button class="uk-button uk-button-danger" @click="delete">
+                        {{ 'Delete' | trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div data-uk-margin>
             <a class="uk-button uk-margin-small-right" :href="$url.route('admin/events/events')">
                 {{ event ? 'Close' : 'Cancel' | trans }}
             </a>
+            <button class="uk-button uk-button-danger" v-show="event.id" data-uk-modal="{target:'#delete-popup', center:true}">
+                {{ 'Delete' | trans }}
+            </button>
             <button class="uk-button uk-button-primary" @click="save">
                 {{ 'Save' | trans }}
             </button>

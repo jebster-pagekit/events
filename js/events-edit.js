@@ -24,8 +24,17 @@ $(function(){
                 this.event.repeating = this.repeat.interval;
                 this.$http.post('admin/events/save', { event: this.event }, function(event) {
                     console.log(event);
-                    UIkit.notify(vm.$trans('Saved.'), '');
+                    UIkit.notify(vm.$trans('Saved'), '');
                 }).error(function(data) {
+                    UIkit.notify(data, 'danger');
+                });
+            },
+
+            delete: function(){
+                this.$http.post('admin/events/delete', {id: this.event.id }, function () {
+                    UIkit.notify(vm.$trans('Deleted'));
+                    location.href = "../events";
+                }).error(function(data){
                     UIkit.notify(data, 'danger');
                 });
             }

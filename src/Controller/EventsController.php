@@ -150,6 +150,18 @@ class EventsController
     }
 
     /**
+     * @Request({"id": "integer"}, csrf=true)
+     * @Access(admin=true)
+     */
+    public function deleteAction($id = 0){
+        $event = Event::find($id);
+        if($event == null)
+            return false;
+        $event->delete();
+        return ['message' => 'Success'];
+    }
+
+    /**
      * @Request({"max": "integer"}, csrf=true)
      * @Access(admin=true)
      */
