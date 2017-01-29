@@ -21,6 +21,7 @@ return [
                 $table->addColumn('end', 'datetime');
                 $table->addColumn('fb_event', 'string', ['length' => 511, 'default' => '']);
                 $table->addColumn('active', 'boolean');
+                $table->addColumn('repeating', 'integer', ['length' => 10, 'notnull' => false, 'default' => null]);
 
                 $table->setPrimaryKey(['id']);
             });

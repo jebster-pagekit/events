@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-form-row" v-show="!repeat.repeating">
                 <span class="uk-form-label">{{ 'End time' | trans }}:</span>
                 <div class="uk-form-controls">
                     <input-date :datetime.sync="event.end.date"></input-date>
@@ -72,8 +72,20 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Options' | trans }}</span>
                 <div class="uk-form-controls">
-                    <label><input type="checkbox" v-model="event.active" value="1"> {{ 'Published' | trans }}</label>
+                    <label>
+                        <input type="checkbox" v-model="event.active" value="1">
+                        {{ 'Published' | trans }}
+                    </label><br>
+                    <label v-show="repeat.show">
+                        <input type="checkbox" v-model="repeat.repeating" :disabled="repeat.hasId" value="1">
+                        {{ 'Repeating event' | trans }}
+                    </label>
                 </div>
+            </div>
+
+            <div class="uk-form-row" v-show="repeat.repeating">
+                <span class="uk-form-label">{{ 'Every number of days' | trans }}</span>
+                <input id="location" class="uk-width-1-1" type="number" min="1" v-model="repeat.interval">
             </div>
         </div>
 

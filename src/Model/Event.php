@@ -49,5 +49,6 @@ class Event
     /** @Column(type="boolean") */
     public $active = true;
 
-
+    /** @Column(type="integer") */
+    public $repeating = null;
 }

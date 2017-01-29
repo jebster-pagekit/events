@@ -49,7 +49,10 @@ class EventsController
      */
     public function eventsAction()
     {
-        $events = Event::findAll();
+
+        $events = Event::where('repeating is null')->get();
+        $repeating = Event::where('repeating is not null')->get();
+
 
         return [
             '$view' => [
@@ -58,7 +61,8 @@ class EventsController
             ],
             '$data' => [
                 // To js
-                'events' => array_values($events)
+                'events' => array_values($events),
+                'repeating' => array_values($repeating)
             ]
         ];
     }
@@ -96,22 +100,6 @@ class EventsController
     }
 
     /**
-     * @Request({"id": "integer"}, csrf=true)
-     * @Access(admin=true)
-     */
-    public function toggleStatusAction($id = 0)
-    {
-        $event = Event::find($id);
-        if($event == null)
-            return false;
-
-        $event->active = !$event->active;
-        $event->save();
-
-        return ['message' => 'success'];
-    }
-
-    /**
      * @Request({"event": "array"}, csrf=true)
      * @Access(admin=true)
      */
@@ -127,6 +115,7 @@ class EventsController
         $end = key_exists('end', $event) ? date_create($event['end']['date']) : new DateTime();
         $fb_event = $this->value($event, 'fb_event');
         $active = $this->value($event, 'active', false);
+        $repeating = $this->value($event, 'repeating', null);
 
         if(key_exists('id', $event) && $event['id'] != null && $event['id'] > 0){
             // Update
@@ -139,6 +128,7 @@ class EventsController
             $ev->end = $end;
             $ev->fb_event = $fb_event;
             $ev->active = $active;
+            $ev->repeating = $repeating;
         }else{
             // New
             $ev = Event::create([
@@ -149,7 +139,8 @@ class EventsController
                 'start' => $start,
                 'end' => $end,
                 'fb_event' => $fb_event,
-                'active' => $active
+                'active' => $active,
+                'repeating' => $repeating
             ]);
         }
 
@@ -171,6 +162,22 @@ class EventsController
         $settings['max'] = $max;
 
         App::config('events')->set('settings', $settings);
+
+        return ['message' => 'success'];
+    }
+
+    /**
+     * @Request({"id": "integer"}, csrf=true)
+     * @Access(admin=true)
+     */
+    public function toggleStatusAction($id = 0)
+    {
+        $event = Event::find($id);
+        if($event == null)
+            return false;
+
+        $event->active = !$event->active;
+        $event->save();
 
         return ['message' => 'success'];
     }
