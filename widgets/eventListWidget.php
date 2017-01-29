@@ -1,6 +1,7 @@
 <?php
 
 use Jebster\Events\Model\Event;
+use Pagekit\Application as App;
 
 return [
     'name' => 'jebster/eventListWidget',
@@ -20,8 +21,7 @@ return [
         // TODO: Add option in admin panel to remove the title
         $widget->title = "";
 
-        // TODO: Limit events by max and order by date!
-        $events = array_values(Event::findAll());
+        $events = Event::getNext(App::module('events')->config['settings']['max']);
 
         return $app->view('events/widgets/eventListWidget.php', compact('events'));
     }

@@ -49,7 +49,7 @@ class EventsController
      */
     public function eventsAction()
     {
-
+        Event::getNext();
         $events = Event::where('repeating is null')->get();
         $repeating = Event::where('repeating is not null')->get();
 

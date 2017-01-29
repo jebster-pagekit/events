@@ -9,6 +9,7 @@
 
 namespace Jebster\Events\Model;
 
+use DateInterval;
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\Application as App;
 
@@ -51,4 +52,51 @@ class Event
 
     /** @Column(type="integer") */
     public $repeating = null;
+
+    /**
+     * @param int $count
+     * @return static[]
+     */
+    public static function getNext($count = 10){
+        // TODO: redo this method, so it's cleaner and faster.
+        $events = array_values(Event::query()
+            ->where('repeating is null')
+            ->orderBy('start')
+            ->limit($count)
+            ->get());
+
+        $repeating = array_values(Event::query()
+            ->where('repeating is not null')
+            ->get());
+
+        foreach ($repeating as $e) {
+            array_push($events, $e);
+            $r = clone $e;
+            for ($i = 0; $i < $count; $i++){
+                $r = clone $r;
+                $interval = new DateInterval('P'.$r->repeating.'D');
+                $r->start->add($interval);
+                $r->end->add($interval);
+                array_push($events, $r);
+            }
+        }
+
+        usort($events, function($e1,$e2){
+            if($e1->start == $e2->start)
+                return 0;
+
+            return $e1->start > $e2->start ? 1 : -1;
+        });
+
+        $events = array_slice($events, 0, $count);
+
+        return $events;
+    }
+
+    function __clone()
+    {
+        $this->start = clone $this->start;
+        $this->end = clone $this->end;
+        $this->creator = $this->creator != null ? clone $this->creator : null;
+    }
 }

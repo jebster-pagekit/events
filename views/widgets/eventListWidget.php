@@ -1,12 +1,3 @@
-<?php
-use Pagekit\Application as App;
-
-$module = App::module('events');
-$config = $module->config;
-$max = $config['settings']['max'];
-$counter = 0;
-
-?>
 <style>
     .jebster_event_list{
 
@@ -33,7 +24,7 @@ $counter = 0;
 
     .jebster_event .jebster_image span{
         position: absolute;
-        left: 15px;
+        left: 14px;
         top: 30px;
         font-size: 24px;
     }
@@ -68,7 +59,7 @@ $counter = 0;
         <div><?= __('No future events') ?></div>
     <?php endif; ?>
 
-    <?php foreach ($events as $event): if($event->active && $counter < $max): $counter++; ?>
+    <?php foreach ($events as $event): ?>
         <div class="jebster_event">
             <div class="jebster_image">
                 <span class="<?php if ($event->start->format('j') < 10) echo 'one_digit' ?>">
@@ -85,6 +76,6 @@ $counter = 0;
                 <?= __('at %location%', ['%location%' => $event->location]) ?>
             </p>
         </div>
-    <?php endif; endforeach; ?>
+    <?php endforeach; ?>
 </div>
 
