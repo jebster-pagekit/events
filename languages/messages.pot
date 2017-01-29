@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 1.0.11 (jebster/events, messages)\n"
-"POT-Creation-Date: 2017-01-28 12:57+0000\n"
+"POT-Creation-Date: 2017-01-29 03:16+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,28 @@ msgstr ""
 msgid "Max events in list"
 msgstr ""
 
+msgid "Events"
+msgstr ""
+
+msgid "Repeating events"
+msgstr ""
+
 msgid "Add Event"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Start time"
+msgstr ""
+
+msgid "Repeating Events"
+msgstr ""
+
+msgid "End time"
+msgstr ""
+
+msgid "Interval"
 msgstr ""
 
 msgid "Edit %event%"
@@ -51,7 +72,40 @@ msgstr ""
 msgid "Published"
 msgstr ""
 
+msgid "Repeating event"
+msgstr ""
+
+msgid "Every number of days"
+msgstr ""
+
 msgid "Saved."
+msgstr ""
+
+msgid "Every day"
+msgstr ""
+
+msgid "Every second day"
+msgstr ""
+
+msgid "Every third day"
+msgstr ""
+
+msgid "Every fourth day"
+msgstr ""
+
+msgid "Every fifth day"
+msgstr ""
+
+msgid "Every sixth day"
+msgstr ""
+
+msgid "Every %weekDayName%"
+msgstr ""
+
+msgid "Every second %weekDayName%"
+msgstr ""
+
+msgid "Every %days% days"
 msgstr ""
 
 msgid "Deleted."
@@ -61,9 +115,6 @@ msgid "Something went wrong, please contact support."
 msgstr ""
 
 msgid "Event Settings"
-msgstr ""
-
-msgid "Events"
 msgstr ""
 
 msgid "New event"
