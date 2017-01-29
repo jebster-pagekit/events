@@ -96,6 +96,22 @@ class EventsController
     }
 
     /**
+     * @Request({"id": "integer"}, csrf=true)
+     * @Access(admin=true)
+     */
+    public function toggleStatusAction($id = 0)
+    {
+        $event = Event::find($id);
+        if($event == null)
+            return false;
+
+        $event->active = !$event->active;
+        $event->save();
+
+        return ['message' => 'success'];
+    }
+
+    /**
      * @Request({"event": "array"}, csrf=true)
      * @Access(admin=true)
      */

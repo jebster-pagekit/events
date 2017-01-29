@@ -3,8 +3,19 @@ $(function(){
         el: '#events',
 
         data: {
-            events: window.$data.events,
+            ev: window.$data.events,
             newEntry: ''
+        },
+
+        computed: {
+            events: function () {
+                var e = [];
+                for(var i = 0; i < this.ev.length; i++){
+                    this.ev[i].start = moment(this.ev[i].start.date).format("DD/MM-YY - HH:mm");
+                    e.push(this.ev[i]);
+                }
+                return e;
+            }
         },
 
         methods: {
@@ -41,6 +52,17 @@ $(function(){
                     entry.id = data.event.id;
                 }).error(function (data) {
                     UIkit.notify(data, 'danger');
+                });
+            },
+
+            toggleStatus: function(event){
+                event.active = !event.active;
+
+                this.$http.post('admin/events/togglestatus', {id: event.id}, function(data){
+
+                }).error(function (data) {
+                    UIkit.notify(data, 'danger');
+                    event.active = !event.active;
                 });
             }
         }

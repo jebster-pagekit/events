@@ -8,29 +8,37 @@ $counter = 0;
 ?>
 <style>
     .jebster_event_list{
-        border-left: 1px solid #000;
-        border-bottom: 1px solid #000;
-        border-right: 1px solid #000;
+
     }
 
     .jebster_event{
         padding: 6px;
         text-align: center;
+        height: 80px;
     }
 
     .jebster_event .jebster_image{
+        position: relative;
         float: left;
-        width: 52px;
-        height: 52px;
-        margin: 5px;
-        background-color: #77B3D4;
-        border-radius: 90px;
+        width: 56px;
+        height: 56px;
     }
 
     .jebster_event .jebster_image img{
-        width: 42px;
-        height: 42px;
-        padding-top: 8px;
+        width: 56px;
+        height: 56px;
+        padding: 8px 0 0 1px;
+    }
+
+    .jebster_event .jebster_image span{
+        position: absolute;
+        left: 15px;
+        top: 30px;
+        font-size: 24px;
+    }
+
+    .jebster_event .jebster_image .one_digit{
+        padding-left: 6px;
     }
 
     .jebster_event_title{
@@ -54,6 +62,7 @@ $counter = 0;
 </style>
 
 <div class="jebster_event_list">
+    <h3>Schedule for the week</h3>
     <?php if(sizeof($events) <= 0): ?>
         <div><?= __('No future events') ?></div>
     <?php endif; ?>
@@ -61,11 +70,15 @@ $counter = 0;
     <?php foreach ($events as $event): if($event->active && $counter < $max): $counter++; ?>
         <div class="jebster_event">
             <div class="jebster_image">
+                <span class="<?php if ($event->start->format('j') < 10) echo 'one_digit' ?>">
+                    <?= $event->start->format('j') ?>
+                </span>
                 <img src="<?= $view->url()->getStatic('events:assets/vectors/5.svg') ?>">
+
             </div>
             <p class="jebster_event_title">
                 <?= $event->title ?> -
-                <?= __('%hourMinute%', ['%hourMinute%' => $event->start->format('h:i')]) ?>
+                <?= __('%hour%:%minute%', ['%hour%:%minute%' => $event->start->format('H:i')]) ?>
             </p>
             <p class="jebster_event_description clearfix">
                 <?= __('at %location%', ['%location%' => $event->location]) ?>
