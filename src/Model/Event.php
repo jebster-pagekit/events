@@ -61,12 +61,14 @@ class Event
         // TODO: redo this method, so it's cleaner and faster.
         $events = array_values(Event::query()
             ->where('repeating is null')
+            ->where('end >= CURDATE()')
             ->orderBy('start')
             ->limit($count)
             ->get());
 
         $repeating = array_values(Event::query()
             ->where('repeating is not null')
+            ->where('end >= CURDATE()')
             ->get());
 
         foreach ($repeating as $e) {

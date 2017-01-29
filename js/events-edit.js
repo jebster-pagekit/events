@@ -6,12 +6,19 @@ $(function(){
         data: {
             event: window.$data.event,
             repeat: {
-                show: true,
-                hasId: window.$data.event.id,
-                repeating: window.$data.event.repeating != null,
-                interval: window.$data.event.repeating == null ? 7 : window.$data.event.repeating
             },
             sections: []
+        },
+
+        computed: {
+            repeat: function () {
+                return {
+                    show: true,
+                    hasId: window.$data.event.id,
+                    repeating: window.$data.event.repeating != null,
+                    interval: window.$data.event.repeating == null ? 7 : window.$data.event.repeating
+                };
+            }
         },
 
         ready: function () {
@@ -21,22 +28,27 @@ $(function(){
 
         methods: {
             save: function(){
-                this.event.repeating = this.repeat.interval;
+                this.event.repeating = this.repeat.repeating ? this.repeat.interval : null;
                 this.$http.post('admin/events/save', { event: this.event }, function(event) {
-                    console.log(event);
                     UIkit.notify(vm.$trans('Saved'), '');
+                    this.event.id = event.event.id;
                 }).error(function(data) {
                     UIkit.notify(data, 'danger');
+                    this.event.id = null;
                 });
             },
 
             delete: function(){
                 this.$http.post('admin/events/delete', {id: this.event.id }, function () {
                     UIkit.notify(vm.$trans('Deleted'));
-                    location.href = "../events";
+                    this.redirect('events');
                 }).error(function(data){
                     UIkit.notify(data, 'danger');
                 });
+            },
+
+            redirect: function(path){
+                location.href = '/admin/events/'+path;
             }
         }
     });

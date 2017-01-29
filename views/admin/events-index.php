@@ -45,40 +45,55 @@ $view->script('events', 'events:js/events-index.js', ['moment', 'moment-recur', 
 
 
                     <table class="uk-table">
-                        <tr>
-                            <th>
-                                {{ 'Title' | trans }}
-                            </th>
-                            <th>
-                                {{ 'Status' | trans }}
-                            </th>
-                            <th>
-                                {{ 'Location' | trans }}
-                            </th>
-                            <th>
-                                {{ 'Start time' | trans }}
-                            </th>
-                        </tr>
-                        <tr v-for="event in events">
-                            <td>
-                                <a :href="$url.route('admin/events/edit/'+event.id)">
-                                    {{ event.title }}
-                                </a>
-                            </td>
-                            <td>
-                                <a :class="{
-                                    'pk-icon-circle-danger': !event.active,
-                                    'pk-icon-circle-success': event.active
-                                    }" @click="toggleStatus(event)"></a>
-                            </td>
-                            <td>
-                                {{ event.location }}
-                            </td>
-                            <td>
-                                {{ event.start }}
-
-                            </td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th class="pk-table-min-width-300">
+                                    {{ 'Title' | trans }}
+                                </th>
+                                <th>
+                                    {{ 'Status' | trans }}
+                                </th>
+                                <th>
+                                    {{ 'Location' | trans }}
+                                </th>
+                                <th>
+                                    {{ 'Start time' | trans }}
+                                </th>
+                                <th>
+                                    {{ 'End time' | trans }}
+                                </th>
+                                <th>
+                                    {{ 'Date' | trans }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="event in events">
+                                <td>
+                                    <a :href="$url.route('admin/events/edit/'+event.id)">
+                                        {{ event.title }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a :class="{
+                                        'pk-icon-circle-danger': !event.active,
+                                        'pk-icon-circle-success': event.active
+                                        }" @click="toggleStatus(event)"></a>
+                                </td>
+                                <td>
+                                    {{ event.location }}
+                                </td>
+                                <td>
+                                    {{ event.start }}
+                                </td>
+                                <td>
+                                    {{ event.end }}
+                                </td>
+                                <td>
+                                    {{ event.date }}
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </li>
 
@@ -96,51 +111,55 @@ $view->script('events', 'events:js/events-index.js', ['moment', 'moment-recur', 
                     </div>
 
                     <table class="uk-table">
-                        <tr>
-                            <th>
-                                {{ 'Title' | trans }}
-                            </th>
-                            <th>
-                                {{ 'Status' | trans }}
-                            </th>
-                            <th>
-                                {{ 'Location' | trans }}
-                            </th>
-                            <th>
-                                {{ 'Start time' | trans }}
-                            </th>
-                            <th>
-                                {{ 'End time' | trans }}
-                            </th>
-                            <th>
-                                {{ 'Interval' | trans }}
-                            </th>
-                        </tr>
-                        <tr v-for="event in repeatingEvents">
-                            <td>
-                                <a :href="$url.route('admin/events/edit/'+event.id)">
-                                    {{ event.title }}
-                                </a>
-                            </td>
-                            <td>
-                                <a :class="{
-                                    'pk-icon-circle-danger': !event.active,
-                                    'pk-icon-circle-success': event.active
-                                    }" @click="toggleStatus(event)"></a>
-                            </td>
-                            <td>
-                                {{ event.location }}
-                            </td>
-                            <td>
-                                {{ event.start }}
-                            </td>
-                            <td>
-                                {{ event.end }}
-                            </td>
-                            <td>
-                                {{ event.interval }}
-                            </td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th class="pk-table-min-width-300">
+                                    {{ 'Title' | trans }}
+                                </th>
+                                <th>
+                                    {{ 'Status' | trans }}
+                                </th>
+                                <th>
+                                    {{ 'Location' | trans }}
+                                </th>
+                                <th>
+                                    {{ 'Start time' | trans }}
+                                </th>
+                                <th>
+                                    {{ 'End time' | trans }}
+                                </th>
+                                <th>
+                                    {{ 'Interval' | trans }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="event in repeatingEvents">
+                                <td>
+                                    <a :href="$url.route('admin/events/edit/'+event.id)">
+                                        {{ event.title }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a :class="{
+                                        'pk-icon-circle-danger': !event.active,
+                                        'pk-icon-circle-success': event.active
+                                        }" @click="toggleStatus(event)"></a>
+                                </td>
+                                <td>
+                                    {{ event.location }}
+                                </td>
+                                <td>
+                                    {{ event.start }}
+                                </td>
+                                <td>
+                                    {{ event.end }}
+                                </td>
+                                <td>
+                                    {{ event.interval }}
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </li>
             </ul>

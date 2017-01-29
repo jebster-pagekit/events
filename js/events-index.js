@@ -12,8 +12,13 @@ $(function(){
             events: function () {
                 var e = [];
                 for(var i = 0; i < this.ev.length; i++){
-                    this.ev[i].start = moment(this.ev[i].start.date).format("DD/MM-YY - HH:mm");
-                    e.push(this.ev[i]);
+                    var event = this.ev[i];
+
+                    event.date = moment(event.start.date).format("DD/MM-YY");
+                    event.start = moment(event.start.date).format("HH:mm");
+                    event.end = moment(event.end.date).format("HH:mm");
+
+                    e.push(event);
                 }
                 return e;
             },
