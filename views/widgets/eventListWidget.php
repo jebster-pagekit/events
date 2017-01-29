@@ -5,6 +5,7 @@ $module = App::module('events');
 $config = $module->config;
 $max = $config['settings']['max'];
 $counter = 0;
+
 ?>
 <style>
     .jebster_event_list{
