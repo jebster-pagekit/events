@@ -84,14 +84,14 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Start time' | trans }}:</span>
                 <div class="uk-form-controls">
-                    <input-date :datetime.sync="event.start.date"></input-date>
+                    <input-date :datetime.sync="event.start"></input-date>
                 </div>
             </div>
 
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'End time' | trans }}:</span>
                 <div class="uk-form-controls">
-                    <input-date :datetime.sync="event.end.date"></input-date>
+                    <input-date :datetime.sync="event.end"></input-date>
                 </div>
             </div>
 
@@ -102,7 +102,7 @@
                         <input type="checkbox" v-model="event.active" value="1">
                         {{ 'Published' | trans }}
                     </label><br>
-                    <label v-show="repeat.show" v-bind:class="{'uk-text-muted': repeat.hasId}">
+                    <label v-show="repeat.show" :class="{'uk-text-muted': repeat.hasId}">
                         <input type="checkbox" v-model="repeat.repeating" :disabled="repeat.hasId" value="1">
                         {{ 'Repeating event' | trans }}
                     </label>

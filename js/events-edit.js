@@ -5,8 +5,6 @@ $(function(){
 
         data: {
             event: window.$data.event,
-            repeat: {
-            },
             sections: []
         },
 
@@ -22,7 +20,9 @@ $(function(){
         },
 
         ready: function () {
-            console.log(this.repeat.repeating);
+            // console.log(this.event.start.date);
+            this.event.start = this.event.start.date;
+            this.event.end = this.event.end.date;
             this.tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
         },
 

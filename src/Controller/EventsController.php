@@ -10,6 +10,7 @@ namespace Jebster\Events\Controller;
 
 use Composer\Console\Application;
 use DateTime;
+use DateTimeZone;
 use Jebster\Events\Model\Event;
 use Pagekit\Application as App;
 
@@ -105,46 +106,14 @@ class EventsController
      */
     public function saveAction($event = null)
     {
-        // TODO: Make this code more beautiful
-        $ev = null;
-
-        $title = $this->value($event, 'title');
-        $description = $this->value($event, 'description');
-        $location = $this->value($event, 'location');
-        $start = key_exists('start', $event) ? date_create($event['start']['date']) : new DateTime();
-        $end = key_exists('end', $event) ? date_create($event['end']['date']) : new DateTime();
-        $fb_event = $this->value($event, 'fb_event');
-        $active = $this->value($event, 'active', false);
-        $repeating = $this->value($event, 'repeating', null);
-
-        if(key_exists('id', $event) && $event['id'] != null && $event['id'] > 0){
-            // Update
-            $ev = Event::find($event['id']);
-
-            $ev->title = $title;
-            $ev->description = $description;
-            $ev->location = $location;
-            $ev->start = $start;
-            $ev->end = $end;
-            $ev->fb_event = $fb_event;
-            $ev->active = $active;
-            $ev->repeating = $repeating;
+        if(!$event || !$ev = Event::find($event['id'])){
+            $ev = Event::create();
+            $event['creator_id'] = App::user()->id;
         }else{
-            // New
-            $ev = Event::create([
-                'title' => $title,
-                'creator_id' => App::user()->id,
-                'description' => $description,
-                'location' => $location,
-                'start' => $start,
-                'end' => $end,
-                'fb_event' => $fb_event,
-                'active' => $active,
-                'repeating' => $repeating
-            ]);
+            $event['creator_id'] = $ev->creator_id;
         }
 
-        $ev->save();
+        $ev->save($event);
 
         return ['message' => 'success', 'event' => $ev];
     }
@@ -158,7 +127,7 @@ class EventsController
         if($event == null)
             return false;
         $event->delete();
-        return ['message' => 'Success'];
+        return ['message'];
     }
 
     /**

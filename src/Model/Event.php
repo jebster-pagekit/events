@@ -10,6 +10,7 @@
 namespace Jebster\Events\Model;
 
 use DateInterval;
+use DateTime;
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\Application as App;
 
@@ -68,7 +69,6 @@ class Event
 
         $repeating = array_values(Event::query()
             ->where('repeating is not null')
-            ->where('end >= CURDATE()')
             ->get());
 
         foreach ($repeating as $e) {
@@ -79,15 +79,16 @@ class Event
                 $interval = new DateInterval('P'.$r->repeating.'D');
                 $r->start->add($interval);
                 $r->end->add($interval);
-                array_push($events, $r);
+                if($r->end > new DateTime())
+                    array_push($events, $r);
             }
         }
 
-        usort($events, function($e1,$e2){
-            if($e1->start == $e2->start)
-                return 0;
-
-            return $e1->start > $e2->start ? 1 : -1;
+        usort($events, function($e1, $e2){
+            return
+                $e1->start == $e2->start ? 0
+                    : $e1->start > $e2->start
+                        ? 1 : -1;
         });
 
         $events = array_slice($events, 0, $count);
