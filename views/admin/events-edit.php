@@ -102,6 +102,10 @@
                         <input type="checkbox" v-model="event.active" value="1">
                         {{ 'Published' | trans }}
                     </label><br>
+<!--                    <label>-->
+<!--                        <input type="checkbox" v-model="event.map">-->
+<!--                        {{ 'Show Map' | trans }}-->
+<!--                    </label><br>-->
                     <label v-show="repeat.show" :class="{'uk-text-muted': repeat.hasId}">
                         <input type="checkbox" v-model="repeat.repeating" :disabled="repeat.hasId" value="1">
                         {{ 'Repeating event' | trans }}

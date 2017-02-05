@@ -44,6 +44,9 @@ class Event
     /** @Column */
     public $location = '';
 
+    /** @Column(type="boolean") */
+    public $map = false;
+
     /** @Column(type="datetime") */
     public $start;
 

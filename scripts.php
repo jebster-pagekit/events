@@ -17,6 +17,7 @@ return [
                 $table->addColumn('description', 'text');
                 $table->addColumn('creator_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
                 $table->addColumn('location', 'string', ['length' => 255, 'default' => '']);
+                $table->addColumn('map', 'boolean');
                 $table->addColumn('start', 'datetime');
                 $table->addColumn('end', 'datetime');
                 $table->addColumn('fb_event', 'string', ['length' => 511, 'default' => '']);
