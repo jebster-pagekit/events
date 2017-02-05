@@ -24,8 +24,13 @@ $(function(){
                 events: this.events,
 
                 weekNumbers: false,
-
-
+                theme: true,
+                themeButtonIcons: {
+                    prev: 'arrowthick-1-w',
+                    next: 'arrowthick-1-e',
+                    prevYear: 'seek-prev',
+                    nextYear: 'seek-next'
+                },
                 // Locale
                 views: {
                     basic: {
@@ -106,6 +111,7 @@ $(function(){
                     e.start = e.start.date;
                     e.end = e.end.date;
                     e.url = 'events/'+e.id;
+                    e.color = '#c00';
                     this.events.push(e);
                 }
 
