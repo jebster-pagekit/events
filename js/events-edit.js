@@ -5,19 +5,15 @@ $(function(){
 
         data: {
             event: window.$data.event,
+            repeat: {
+                show: true,
+                hasId: window.$data.event.id,
+                repeating: window.$data.event.repeating != null,
+                interval: window.$data.event.repeating == null ? 7 : window.$data.event.repeating
+            },
             sections: []
         },
 
-        computed: {
-            repeat: function () {
-                return {
-                    show: true,
-                    hasId: window.$data.event.id,
-                    repeating: window.$data.event.repeating != null,
-                    interval: window.$data.event.repeating == null ? 7 : window.$data.event.repeating
-                };
-            }
-        },
 
         ready: function () {
             // console.log(this.event.start.date);

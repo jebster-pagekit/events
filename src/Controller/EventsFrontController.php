@@ -19,9 +19,9 @@ class EventsFrontController
      *
      */
     public function indexAction(){
-        $from = (new DateTime())->sub(new DateInterval("P2Y"));
-        $to = (new DateTime())->add(new DateInterval("P2Y"));
-        $events = Event::getEvents($from, $to, 5000);
+        $from = (new DateTime())->sub(new DateInterval("P1Y"));
+        $to = (new DateTime())->add(new DateInterval("P5Y"));
+        $events = Event::getEvents($from, $to, 7500);
 
         return [
             '$view' => [
