@@ -1,6 +1,4 @@
 <?php
-use Jebster\Events\Util\TimeHelper;
-
 $testb = 'Trying';
 
 echo "<script>var testb = ".json_encode($events).";</script>";

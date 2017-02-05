@@ -101,15 +101,9 @@ class Event
                 return true;
             };
 
-            if($count == null){
-                while($r->end < $to){
-                    if ($recreate()) break;
-                }
-            }else{
-                for ($i = 0; $i < $count; $i++) {
-                    if(!$recreate()) break;
-                }
-            }
+            $i = 0;
+            while($recreate() && ($count == null || $count >= $i))
+                $i++;
         }
 
         usort($events, function($e1, $e2){
