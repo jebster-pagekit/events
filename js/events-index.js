@@ -27,7 +27,7 @@ $(function(){
                 for(var i = 0; i < this.rev.length; i++){
                     var r = this.rev[i];
 
-                    r.interval = this.intervalDisplay(r.start.date, r.repeating);
+                    r.interval = intervalDisplay(this, r.start.date, r.repeating);
 
                     r.start = moment(r.start.date).format("HH:mm");
                     r.end = moment(r.end.date).format("HH:mm");
@@ -39,39 +39,6 @@ $(function(){
         },
 
         methods: {
-            // TODO: Move this function somewhere else. this is copied and pasted into the event-frontend.js file also
-            intervalDisplay: function (date, interval) {
-
-                switch(interval){
-                    case 1:
-                        return this.$trans('Every day');
-                        break;
-                    case 2:
-                        return this.$trans('Every second day');
-                        break;
-                    case 3:
-                        return this.$trans('Every third day');
-                        break;
-                    case 4:
-                        return this.$trans('Every fourth day');
-                        break;
-                    case 5:
-                        return this.$trans('Every fifth day');
-                        break;
-                    case 6:
-                        return this.$trans('Every sixth day');
-                        break;
-                    case 7:
-                        return this.$trans('Every %weekDayName%', {weekDayName:moment(date).format('dddd')});
-                        break;
-                    case 14:
-                        return this.$trans('Every second %weekDayName%', {weekDayName:moment(date).format('dddd')});
-                        break;
-                }
-
-                return this.$trans('Every %days% days', {days:interval});
-            },
-
             add: function(e) {
                 e.preventDefault();
 

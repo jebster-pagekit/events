@@ -1,5 +1,5 @@
 function intervalDisplay(vm, date, interval) {
-
+    interval = parseInt(interval);
     switch (interval) {
         case 1:
             return vm.$trans('Every day');
@@ -20,16 +20,14 @@ function intervalDisplay(vm, date, interval) {
             return vm.$trans('Every sixth day');
             break;
         case 7:
-            return vm.$trans('Every %weekDayName%', {weekDayName: moment(date).format('dddd')});
+            return vm.$trans('Every %weekDayName%', {weekDayName: displayDay(vm, moment(date).weekday(), false)});
             break;
         case 14:
-            return vm.$trans('Every second %weekDayName%', {weekDayName: moment(date).format('dddd')});
+            return vm.$trans('Every second %weekDayName%', {weekDayName: displayDay(vm, moment(date).weekday(), false)});
             break;
     }
-
-    return this.vm('Every %days% days', {days: interval});
+    return vm.$trans('Every %days% days', {days: interval});
 }
-
 
 function displayMonth(vm, month, abbr){
     month = parseInt(month);

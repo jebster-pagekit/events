@@ -1,7 +1,8 @@
 <?php
 $view->script('moment', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js');
 $view->script('moment-recur', 'events:assets/js/moment-recur.min.js', 'moment');
-$view->script('events', 'events:js/events-index.js', ['moment', 'moment-recur', 'vue']);
+$view->script('utils', 'events:js/utils.js');
+$view->script('events', 'events:js/events-index.js', ['moment', 'moment-recur', 'vue', 'utils']);
 ?>
 
 <div id="events" class="uk-form" v-cloak>
