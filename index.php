@@ -12,9 +12,13 @@ return [
         'events:' => ''
     ],
     'routes' => [
-        '@events' => [
+        'admin/events' => [
             'path' => '/events',
             'controller' => 'Jebster\\Events\\Controller\\EventsController'
+        ],
+        'events' => [
+            'path' => '/events',
+            'controller' => 'Jebster\\Events\\Controller\\EventsFrontController'
         ]
     ],
 

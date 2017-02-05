@@ -39,6 +39,7 @@ $(function(){
         },
 
         methods: {
+            // TODO: Move this function somewhere else. this is copied and pasted into the event-frontend.js file also
             intervalDisplay: function (date, interval) {
 
                 switch(interval){

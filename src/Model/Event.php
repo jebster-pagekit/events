@@ -19,6 +19,11 @@ use Pagekit\Application as App;
  */
 class Event
 {
+
+    public static function test(){
+        return "Bong";
+    }
+
     use ModelTrait;
 
     /** @Column(type="integer") @Id */
@@ -54,33 +59,53 @@ class Event
     /** @Column(type="integer") */
     public $repeating = null;
 
-    /**
-     * @param int $count
-     * @return static[]
-     */
-    public static function getNext($count = 10){
+    public static function getEvents($from, $to, $count = 10){
         // TODO: redo this method, so it's cleaner and faster.
-        $events = array_values(Event::query()
-            ->where('repeating is null')
-            ->where('end >= CURDATE()')
-            ->orderBy('start')
-            ->limit($count)
-            ->get());
+        $events = Event::query()->where('repeating is null');
+
+        $events = $events->where('end >= ?', [$from]);
+        if($to != null){
+            $events = $events->where('end <= ?', [$to]);
+        }
+
+
+        $events = $events->orderBy('start');
+        if($count != null)
+            $events = $events->limit($count);
+
+        $events = $events->get();
+
+        $events = array_values($events);
 
         $repeating = array_values(Event::query()
             ->where('repeating is not null')
             ->get());
 
         foreach ($repeating as $e) {
-            array_push($events, $e);
+            if($e->end > $from)
+                array_push($events, $e);
             $r = clone $e;
-            for ($i = 0; $i < $count; $i++){
+
+            $recreate = function () use(&$r, $from, $to, &$events){
                 $r = clone $r;
-                $interval = new DateInterval('P'.$r->repeating.'D');
+                $interval = new DateInterval('P' . $r->repeating . 'D');
                 $r->start->add($interval);
                 $r->end->add($interval);
-                if($r->end > new DateTime())
-                    array_push($events, $r);
+
+                if($to != null && $to < $r->end) return false;
+                if ($r->end > $from) array_push($events, $r);
+
+                return true;
+            };
+
+            if($count == null){
+                while($r->end < $to){
+                    if ($recreate()) break;
+                }
+            }else{
+                for ($i = 0; $i < $count; $i++) {
+                    if(!$recreate()) break;
+                }
             }
         }
 
@@ -88,13 +113,24 @@ class Event
             return
                 $e1->start == $e2->start ? 0
                     : $e1->start > $e2->start
-                        ? 1 : -1;
+                    ? 1 : -1;
         });
 
-        $events = array_slice($events, 0, $count);
+        if($count != null)
+            $events = array_slice($events, 0, $count);
 
         return $events;
     }
+
+    /**
+     * @param int $count
+     * @return static[]
+     */
+    public static function getNext($count = 10){
+        return self::getEvents(new DateTime(), null, $count);
+    }
+
+
 
     function __clone()
     {

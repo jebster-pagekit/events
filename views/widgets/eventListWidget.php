@@ -1,102 +1,13 @@
 <?php
+use Jebster\Events\Util\TimeHelper;
 
-function displayMonth($month, $abbr = false){
-    if($abbr){
-        switch ($month) {
-            case 1:
-                return __('Jan');
-            case 2:
-                return __('Feb');
-            case 3:
-                return __('Mar');
-            case 4:
-                return __('Apr');
-            case 5:
-                return __('May');
-            case 6:
-                return __('Jun');
-            case 7:
-                return __('Jul');
-            case 8:
-                return __('Aug');
-            case 9:
-                return __('Sep');
-            case 10:
-                return __('Oct');
-            case 11:
-                return __('Nov');
-            case 12:
-                return __('Dec');
-        }
-    }else{
-        switch ($month) {
-            case 1:
-                return __('January');
-            case 2:
-                return __('February');
-            case 3:
-                return __('March');
-            case 4:
-                return __('April');
-            case 5:
-                return __('May');
-            case 6:
-                return __('June');
-            case 7:
-                return __('July');
-            case 8:
-                return __('August');
-            case 9:
-                return __('September');
-            case 10:
-                return __('October');
-            case 11:
-                return __('November');
-            case 12:
-                return __('December');
-        }
-    }
-    return '';
-}
+$testb = 'Trying';
 
-function displayDay($day, $abbr = false){
-    if($abbr){
-        switch ($day) {
-            case 1:
-                return __('Mon');
-            case 2:
-                return __('Tue');
-            case 3:
-                return __('Wed');
-            case 4:
-                return __('Thu');
-            case 5:
-                return __('Fri');
-            case 6:
-                return __('Sat');
-            case 7:
-                return __('Sun');
-        }
-    }else{
-        switch ($day) {
-            case 1:
-                return __('Monday');
-            case 2:
-                return __('Tuesday');
-            case 3:
-                return __('Wednesday');
-            case 4:
-                return __('Thursday');
-            case 5:
-                return __('Friday');
-            case 6:
-                return __('Saturday');
-            case 7:
-                return __('Sunday');
-        }
-    }
-    return '';
-}
+echo "<script>var testb = ".json_encode($events).";</script>";
+
+$view->script('utils', 'events:js/utils.js', 'vue');
+$view->script('moment', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js');
+$view->script('eventList', 'events:js/eventListWidget.js', ['utils', 'vue', 'moment']);
 
 ?>
 
@@ -175,40 +86,46 @@ function displayDay($day, $abbr = false){
         left: 26px;
     }
 
+    .jebster_event_link{
+        color: black;
+    }
+
 </style>
 
-<div class="jebster_event_list">
-    <h3>Schedule for the week</h3>
-    <?php if(sizeof($events) <= 0): ?>
+<div id="eventList" class="jebster_event_list">
+    <h3><a href="events" class="jebster_event_link">Schedule for the week</a></h3>
+
+    <?php
+
+    if(sizeof($events) <= 0): ?>
         <div><?= __('No future events') ?></div>
     <?php endif; ?>
-
-    <?php foreach ($events as $event): ?>
-        <div class="jebster_event">
-            <div class="jebster_image">
-                <!-- TODO: just use css instead of image -->
-                <div class="jebster_calendar_icon" style="
-                        -webkit-mask-image: url('<?= $view->url()->getStatic('events:assets/images/test.png') ?>');">
-                </div>
-                <span class="jebster_month">
-                    <?= displayMonth($event->start->format('n'), true) ?>
-                </span>
-                <span class="jebster_dayNumber <?= $event->start->format('j') < 10 ? 'jebster_onedigit' : '' ?>">
-                    <?= $event->start->format('j') ?>
-                </span>
-                <span class="jebster_dayName">
-                    <?= displayDay($event->start->format('N'), true) ?>
-                </span>
+    <div class="jebster_event" v-for="event in events">
+        <div class="jebster_image">
+            <!-- TODO: just use css instead of image -->
+            <div class="jebster_calendar_icon" style="
+                    -webkit-mask-image: url('<?= $view->url()->getStatic('events:assets/images/test.png') ?>');">
             </div>
-
-            <p class="jebster_event_title">
-                <?= $event->title ?> -
-                <?= __('%hour%:%minute%', ['%hour%:%minute%' => $event->start->format('H:i')]) ?>
-            </p>
-            <p class="jebster_event_description clearfix">
-                <?= __('at %location%', ['%location%' => $event->location]) ?>
-            </p>
+            <span class="jebster_month">
+                {{ event.month }}
+            </span>
+            <span class="jebster_dayNumber" :class="{'jebster_onedigit': event.day_number < 10}">
+                {{ event.day_number }}
+            </span>
+            <span class="jebster_dayName">
+                {{ event.day_name }}
+            </span>
         </div>
-    <?php endforeach; ?>
+        <p class="jebster_event_title">
+            <a href="events/{{event.id}}" class="jebster_event_link">
+                {{ event.title }} -
+                {{ event.time_interval }}
+            </a>
+        </p>
+        <p class="jebster_event_description clearfix">
+            {{ 'at %location%' | trans {location: event.location} }}
+        </p>
+    </div>
+
 </div>
 

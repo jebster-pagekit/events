@@ -12,6 +12,7 @@ use Composer\Console\Application;
 use DateTime;
 use DateTimeZone;
 use Jebster\Events\Model\Event;
+use Jebster\Events\Util\TimeHelper;
 use Pagekit\Application as App;
 
 class EventsController
