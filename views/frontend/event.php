@@ -1,7 +1,7 @@
 <?php
 $view->script('moment', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js');
 $view->script('utils', 'events:js/utils.js', 'vue');
-$view->script('event', 'events:js/event-frontend.js', ['vue', 'moment', 'utils'])
+$view->script('event', 'events:js/frontend/event.js', ['vue', 'moment', 'utils'])
 ?>
 <div id="event">
 <br>

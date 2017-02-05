@@ -11,6 +11,7 @@ return [
     'resources' => [
         'events:' => ''
     ],
+
     'routes' => [
         'admin/events' => [
             'path' => '/events',
@@ -28,7 +29,9 @@ return [
 
     'config' => [
         'settings' => [
-            'max' => 8
+            'max' => 8,
+            'uri-calendar' => 'calendar',
+            'uri-events' => 'events'
         ]
     ],
 
