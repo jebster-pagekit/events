@@ -38,14 +38,23 @@ $view->script('eventList', 'events:js/eventListWidget.js', ['utils', 'vue', 'mom
     }
 
     .jebster_event_title{
-        margin: 10px 0 0 0;
+        margin: 3px 0 0 0;
         font-size: 16px;
+        text-align: center;
     }
 
     .jebster_event_description{
         font-size: 12px;
         font-style: italic;
         line-height:12px;
+        text-align: center;
+    }
+
+    .jebster_event_shortdescription{
+        font-size: 12px;
+        line-height: 22px;
+        text-align: center;
+        margin-bottom: 2px;
     }
 
     .jebster_event:nth-child(even){
@@ -86,12 +95,19 @@ $view->script('eventList', 'events:js/eventListWidget.js', ['utils', 'vue', 'mom
 
     .jebster_event_link{
         color: black;
+        text-decoration: none;
+    }
+
+    .jebster_event_link:hover{
+        text-decoration: none;
     }
 
 </style>
 
 <div id="eventList" class="jebster_event_list">
-    <h3><a href="events" class="jebster_event_link">Schedule for the week</a></h3>
+    <h3 style="text-align: center;"><a href="events" class="jebster_event_link">
+            {{ 'Schedule for the week' | trans }}
+        </a></h3>
 
     <?php
 
@@ -99,30 +115,35 @@ $view->script('eventList', 'events:js/eventListWidget.js', ['utils', 'vue', 'mom
         <div><?= __('No future events') ?></div>
     <?php endif; ?>
     <div class="jebster_event" v-for="event in events">
-        <div class="jebster_image">
-            <!-- TODO: just use css instead of image -->
-            <div class="jebster_calendar_icon" style="
-                    -webkit-mask-image: url('<?= $view->url()->getStatic('events:assets/images/test.png') ?>');">
+        <a href="events/{{event.id}}" class="jebster_event_link">
+            <div class="jebster_image">
+                <!-- TODO: just use css instead of image -->
+                <div class="jebster_calendar_icon" style="
+                        -webkit-mask-image: url('<?= $view->url()->getStatic('events:assets/images/test.png') ?>');">
+                </div>
+                <span class="jebster_month">
+                    {{ event.month }}
+                </span>
+                <span class="jebster_dayNumber" :class="{'jebster_onedigit': event.day_number < 10}">
+                    {{ event.day_number }}
+                </span>
+                <span class="jebster_dayName">
+                    {{ event.day_name }}
+                </span>
             </div>
-            <span class="jebster_month">
-                {{ event.month }}
-            </span>
-            <span class="jebster_dayNumber" :class="{'jebster_onedigit': event.day_number < 10}">
-                {{ event.day_number }}
-            </span>
-            <span class="jebster_dayName">
-                {{ event.day_name }}
-            </span>
-        </div>
-        <p class="jebster_event_title">
-            <a href="events/{{event.id}}" class="jebster_event_link">
-                {{ event.title }} -
-                {{ event.time_interval }}
-            </a>
-        </p>
-        <p class="jebster_event_description clearfix">
-            {{ 'at %location%' | trans {location: event.location} }}
-        </p>
+            <div style="margin: 0 0 0 62px;">
+                <p class="jebster_event_title">
+                        {{ event.title }} -
+                        {{ event.time_interval }}
+                </p>
+                <p class="jebster_event_shortdescription">
+                    {{ event.short_description }}
+                </p>
+                <p class="jebster_event_description clearfix">
+                    {{ 'at %location%' | trans {location: event.location} }}
+                </p>
+            </div>
+        </a>
     </div>
 
 </div>

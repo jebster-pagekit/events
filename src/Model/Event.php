@@ -19,11 +19,6 @@ use Pagekit\Application as App;
  */
 class Event
 {
-
-    public static function test(){
-        return "Bong";
-    }
-
     use ModelTrait;
 
     /** @Column(type="integer") @Id */
@@ -31,6 +26,9 @@ class Event
 
     /** @Column */
     public $title = '';
+
+    /** @Column(type="text") */
+    public $short_description = '';
 
     /** @Column(type="text") */
     public $description = '';
