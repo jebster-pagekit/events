@@ -1,6 +1,6 @@
 {
   "name": "jebster/events",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "pagekit-extension",
   "title": "Events",
   "description": "Show events of all kind on website with calendar widgets",

@@ -26,6 +26,8 @@ $(function(){
                 this.event.repeating = this.repeat.repeating ? this.repeat.interval : null;
                 this.$http.post('admin/events/save', { event: this.event }, function(event) {
                     UIkit.notify(vm.$trans('Saved'), '');
+                    if(!this.event.id)
+                        this.redirect('edit/'+event.event.id);
                     this.event.id = event.event.id;
                 }).error(function(data) {
                     UIkit.notify(data, 'danger');
