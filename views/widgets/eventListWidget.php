@@ -137,7 +137,7 @@ $view->script('eventList', 'events:js/eventListWidget.js', ['utils', 'vue', 'mom
                         {{ event.time_interval }}
                 </p>
                 <p class="jebster_event_shortdescription">
-                    {{ event.short_description }}
+                    &nbsp;{{ event.short_description }}&nbsp;
                 </p>
                 <p class="jebster_event_description clearfix">
                     {{ 'at %location%' | trans {location: event.location} }}

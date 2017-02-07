@@ -32,6 +32,7 @@ $(function(){
                     nextYear: 'seek-next'
                 },
                 // Locale
+                firstDay: 1,
                 views: {
                     basic: {
                         columnFormat: 'ddd',

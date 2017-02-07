@@ -83,11 +83,15 @@ class EventsController
         if($id > 0) {
             $event = Event::find($id);
             if($event)
-                $title = __('Edit %event%', ['%event%' => $event->title]);
+                $title = __("Edit '%eventTitle%'", ['%eventTitle%' => $event->title]);
             else
                 // TODO: Maybe show a message instead of redirecting
                 return App::redirect('@events/events');
         }
+
+        // TODO: Fix this and remove this hack
+        $event->start = $event->start->format('D M d Y H:i:s O');
+        $event->end = $event->end->format('D M d Y H:i:s O');
 
         return [
             '$view' => [

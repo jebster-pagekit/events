@@ -14,11 +14,10 @@ $(function(){
             sections: []
         },
 
-
         ready: function () {
-            // console.log(this.event.start.date);
-            this.event.start = this.event.start.date;
-            this.event.end = this.event.end.date;
+            console.log(moment(this.event.start.date).format('YYYY-MM-DD [at] TT tt hh:mm'));
+            // this.event.start = this.event.start.date;
+            // this.event.end = this.event.end.date;
             this.tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
         },
 

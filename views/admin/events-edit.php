@@ -1,4 +1,7 @@
-<?php $view->script('event', 'events:js/events-edit.js', ['vue', 'vue-router', 'VueRouter', 'editor', 'uikit']) ?>
+<?php
+$view->script('moment', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js');
+$view->script('event', 'events:js/events-edit.js', ['vue', 'vue-router', 'VueRouter', 'editor', 'uikit', 'moment'])
+?>
 
 <div id="event" class="uk-form" v-cloak>
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>

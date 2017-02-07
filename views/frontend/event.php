@@ -49,7 +49,7 @@ $view->script('event', 'events:js/frontend/event.js', ['vue', 'moment', 'utils']
                 </div>
             </div>
             <div class="panel-footer">
-                <a class="btn btn-sm btn-primary pull-right" data-original-title="Broadcast Message" data-toggle="tooltip" type="button">
+                <a class="btn btn-sm btn-danger pull-right" data-original-title="Broadcast Message" data-toggle="tooltip" type="button">
                     <i class="glyphicon glyphicon-share-alt"></i>
                 </a>
                 Facebook Comments?
