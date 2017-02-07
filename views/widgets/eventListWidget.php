@@ -28,13 +28,24 @@ $view->script('eventList', 'events:js/eventListWidget.js', ['utils', 'vue', 'mom
         height: 56px;
     }
 
-    .jebster_event .jebster_image .jebster_calendar_icon{
-        width: 62px;
-        height: 62px;
-        background-color: #BA0000;
-        -webkit-mask-repeat: no-repeat;
-        -webkit-mask-size: 58px;
+    .jebster_calendar_icon{
+        width: 58px;
+        height: 58px;
+        border: 5px solid #BA0000;
+        border-radius: 10px;
         margin: 4px 0 0 2px;
+    }
+
+    .jebster_calendar_icon::before{
+        position: absolute;
+        border: 5px solid #BA0000;
+        border-radius: 10px 10px 0 0;
+        background-color: #BA0000;
+        height: 18px;
+        width: 58px;
+        top: 4px;
+        left: 2px;
+        content: ' ';
     }
 
     .jebster_event_title{
@@ -117,10 +128,7 @@ $view->script('eventList', 'events:js/eventListWidget.js', ['utils', 'vue', 'mom
     <div class="jebster_event" v-for="event in events">
         <a href="events/{{event.id}}" class="jebster_event_link">
             <div class="jebster_image">
-                <!-- TODO: just use css instead of image -->
-                <div class="jebster_calendar_icon" style="
-                        -webkit-mask-image: url('<?= $view->url()->getStatic('events:assets/images/test.png') ?>');">
-                </div>
+                <div class="jebster_calendar_icon"></div>
                 <span class="jebster_month">
                     {{ event.month }}
                 </span>
