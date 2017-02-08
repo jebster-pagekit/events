@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 1.0.11 (jebster/events, messages)\n"
-"POT-Creation-Date: 2017-02-05 23:14+0000\n"
+"POT-Creation-Date: 2017-02-08 23:37+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -282,6 +282,6 @@ msgstr ""
 msgid "New event"
 msgstr ""
 
-msgid "Edit %event%"
+msgid "Edit '%eventTitle%'"
 msgstr ""
 

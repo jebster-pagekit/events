@@ -116,7 +116,7 @@ $view->script('eventList', 'events:js/eventListWidget.js', ['utils', 'vue', 'mom
 </style>
 
 <div id="eventList" class="jebster_event_list">
-    <h3 style="text-align: center;"><a href="events" class="jebster_event_link">
+    <h3 style="text-align: center;"><a href="/events" class="jebster_event_link">
             {{ 'Schedule for the week' | trans }}
         </a></h3>
 
@@ -126,7 +126,7 @@ $view->script('eventList', 'events:js/eventListWidget.js', ['utils', 'vue', 'mom
         <div><?= __('No future events') ?></div>
     <?php endif; ?>
     <div class="jebster_event" v-for="event in events">
-        <a href="events/{{event.id}}" class="jebster_event_link">
+        <a href="/events/{{event.id}}" class="jebster_event_link">
             <div class="jebster_image">
                 <div class="jebster_calendar_icon"></div>
                 <span class="jebster_month">
