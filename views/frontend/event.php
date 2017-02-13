@@ -1,7 +1,9 @@
 <?php
-$view->script('moment', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js');
+$view->script('moment', 'events:assets/js/libraries/moment.min.js');
 $view->script('utils', 'events:js/utils.js', 'vue');
-$view->script('event', 'events:js/frontend/event.js', ['vue', 'moment', 'utils'])
+$view->script('event', 'events:js/frontend/event.js', ['vue', 'moment', 'utils']);
+
+$view->style('font-awesome', 'events:assets/css/libraries/font-awesome.min.css');
 ?>
 <div id="event">
 <br>
@@ -50,7 +52,7 @@ $view->script('event', 'events:js/frontend/event.js', ['vue', 'moment', 'utils']
             </div>
             <div class="panel-footer">
                 <a class="btn btn-sm btn-danger pull-right" data-original-title="Broadcast Message" data-toggle="tooltip" type="button">
-                    <i class="glyphicon glyphicon-share-alt"></i>
+<!--                    <i class="glyphicon glyphicon-share-alt"></i>--><i class="fa fa-share" aria-hidden="true"></i>
                 </a>
                 Facebook Comments?
                 <br><br>

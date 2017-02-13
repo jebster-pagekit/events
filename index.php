@@ -31,14 +31,16 @@ return [
         'settings' => [
             'max' => 8,
             'uri-calendar' => 'calendar',
-            'uri-events' => 'events'
+            'uri-events' => 'events',
+            'frontEndStyle' => 'UIKit'
         ]
     ],
 
     'menu' => [
         'events' => [
             'label'  => 'Events',
-            'icon'   => 'app/system/assets/images/placeholder-icon.svg',
+            // https://www.iconfinder.com/icons/569109/calendar_clock_event_google_schedule_icon
+            'icon'   => 'events:assets/images/menu-item.png',
             'url'    => '@events/events',
             'active' => '@events/*'
         ],

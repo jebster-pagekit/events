@@ -39,6 +39,8 @@ class EventsFrontController
      */
     public function eventAction($id = 0){
         $event = Event::find($id);
+        if($event == null || !$event->active)
+            App::abort(404, __('Event not found'));
         return [
             '$view' => [
                 'title' => $event->title,

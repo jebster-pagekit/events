@@ -36,6 +36,19 @@
                             </p>
                         </div>
                     </div>
+
+                    <div class="uk-form-row">
+                        <label class="uk-form-label">{{ 'Front end style' | trans }}</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <p class="uk-form-controls-condensed">
+                                <select class="uk-form-width-small" v-model="settings.frontEndStyle">
+                                    <option v-for="option in frontEndStyleOptions">
+                                        {{ option }}
+                                    </option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <h1>{{ 'No more settings at the moment' | trans}}</h1>

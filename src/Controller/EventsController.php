@@ -152,6 +152,15 @@ class EventsController
     }
 
     /**
+     * @Request({"settings": "array"}, csrf=true)
+     * @Access(admin=true)
+     */
+    public function updateSettingsAction($settings = null){
+        App::config('events')->set('settings', $settings);
+        return ['message' => 'success'];
+    }
+
+    /**
      * @Request({"id": "integer"}, csrf=true)
      * @Access(admin=true)
      */

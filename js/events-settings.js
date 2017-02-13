@@ -3,13 +3,13 @@ $(function(){
         el: '#settings',
 
         data: {
-            settings: window.$data.settings
+            settings: window.$data.settings,
+            frontEndStyleOptions: ['UIKit','Bootstrap'],
         },
 
         methods: {
             save: function () {
-                alert('Loaded');
-                this.$http.post('/admin/events/updatemax', { max: this.settings.max }, function() {
+                this.$http.post('/admin/events/updatesettings', {settings: this.settings}, function () {
                     UIkit.notify(vm.$trans('Saved.'), '');
                 }).error(function(data) {
                     UIkit.notify(data, 'danger');

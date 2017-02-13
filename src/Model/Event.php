@@ -62,7 +62,9 @@ class Event
 
     public static function getEvents($from, $to, $count = 10){
         // TODO: redo this method, so it's cleaner and faster.
-        $events = Event::query()->where('repeating is null');
+        $events = Event::query()
+            ->where('repeating is null')
+            ->where('active = 1');
 
         $events = $events->where('end >= ?', [$from]);
         if($to != null){
@@ -80,6 +82,7 @@ class Event
 
         $repeating = array_values(Event::query()
             ->where('repeating is not null')
+            ->where('active = 1')
             ->get());
 
         foreach ($repeating as $e) {
