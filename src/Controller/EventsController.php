@@ -48,22 +48,21 @@ class EventsController
 
     /**
      * @Access(admin=true)
+     * @Request({"e": "int", "r":"int"})
      */
-    public function eventsAction()
+    public function eventsAction($e = 0, $r = 0)
     {
-        $events = Event::where('repeating is null')->get();
-        $repeating = Event::where('repeating is not null')->get();
-
-
         return [
             '$view' => [
                 'title' => __("Events"),
                 'name' => 'events:views/admin/events-index.php'
             ],
             '$data' => [
-                // To js
-                'events' => array_values($events),
-                'repeating' => array_values($repeating)
+                'statuses' => Event::getStatuses(),
+                'config' => [
+                    'events_page' => $e,
+                    'repeating_page' => $r
+                ]
             ]
         ];
     }
@@ -88,10 +87,6 @@ class EventsController
                 // TODO: Maybe show a message instead of redirecting
                 return App::redirect('@events/events');
         }
-
-        // TODO: Fix this and remove this hack
-        $event->start = $event->start->format('D M d Y H:i:s O');
-        $event->end = $event->end->format('D M d Y H:i:s O');
 
         return [
             '$view' => [
@@ -180,5 +175,4 @@ class EventsController
     private function value($array, $value, $default = '2'){
         return key_exists($value, $array) ? $array[$value] : $default;
     }
-
 }

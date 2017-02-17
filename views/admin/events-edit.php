@@ -10,7 +10,6 @@ $view->script('event', 'events:js/events-edit.js', ['vue', 'vue-router', 'VueRou
             <h2 class="uk-margin-remove" v-else>{{ 'Add Event' | trans }}</h2>
         </div>
 
-
         <div id="delete-popup" class="uk-modal" >
             <div class="uk-modal-dialog">
                 <button type="button" class="uk-modal-close uk-close"></button>
@@ -46,87 +45,138 @@ $view->script('event', 'events:js/events-edit.js', ['vue', 'vue-router', 'VueRou
 
         </div>
     </div>
+    <ul class="uk-tab" v-el:tab>
+        <li>
+            <a>{{ 'General' | trans }}</a>
+        </li>
+        <li>
+            <a>{{ 'Meta' | trans }}</a>
+        </li>
+    </ul>
+    <div class="uk-switcher uk-margin" v-el:content>
+        <div>
+            <div class="uk-grid pk-grid-large pk-width-sidebar-large uk-form-stacked" data-uk-grid-margin>
 
-    <div class="uk-grid pk-grid-large pk-width-sidebar-large uk-form-stacked" data-uk-grid-margin>
+                <div class="pk-width-content">
+                    <div class="uk-form-row">
+                        <label for="form-title" class="uk-form-label">{{ 'Title' | trans }}</label>
+                        <div class="uk-form-controls">
+                            <input id="form-title" class="uk-width-1-1" type="text"
+                                   placeholder="{{ 'Enter Title' | trans }}" v-model="event.title">
+                        </div>
+                    </div>
 
+                    <div class="uk-form-row">
+                        <label for="form-short" class="uk-form-label">{{ 'Short description' | trans }}</label>
+                        <div class="uk-form-controls">
+                            <input id="form-short" class="uk-width-1-1" type="text"
+                                   placeholder="{{ 'Enter a short description' | trans }}" v-model="event.short_description">
+                        </div>
+                    </div>
 
-        <div class="pk-width-content">
-            <div class="uk-form-row">
-                <label for="form-title" class="uk-form-label">{{ 'Title' | trans }}</label>
-                <div class="uk-form-controls">
-                    <input id="form-title" class="uk-width-1-1" type="text"
-                           placeholder="{{ 'Enter Title' | trans }}" v-model="event.title">
+                    <div class="uk-form-row">
+                        <label for="form-location" class="uk-form-label">{{ 'Location' | trans }}</label>
+                        <div class="uk-form-controls">
+                            <input id="form-location" class="uk-width-1-1" type="text" placeholder="{{ 'Enter Location' | trans }}" v-model="event.location" >
+                        </div>
+                    </div>
+
+                    <div class="uk-form-row">
+                        <label for="form-description" class="uk-form-label">{{ 'Description' | trans }}</label>
+                        <div class="uk-form-controls">
+                            <v-editor id="form-description" :value.sync="event.description" :options="{markdown : post.data.markdown, height: 250}"></v-editor>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="uk-form-row">
-                <label for="form-short" class="uk-form-label">{{ 'Short description' | trans }}</label>
-                <div class="uk-form-controls">
-                    <input id="form-short" class="uk-width-1-1" type="text"
-                        placeholder="{{ 'Enter a short description' | trans }}" v-model="event.short_description">
-                </div>
-            </div>
+                <div class="pk-width-sidebar">
+                    <div class="uk-form-row">
+                        <label for="form-facebook" class="uk-form-label">{{ 'Image' | trans }}:</label>
+                        <div class="uk-form-controls">
+                            <input-image-meta :image.sync="event.data.image" class="pk-image-max-height"></input-image-meta>
+                        </div>
+                    </div>
 
-            <div class="uk-form-row">
-                <label for="form-location" class="uk-form-label">{{ 'Location' | trans }}</label>
-                <div class="uk-form-controls">
-                    <input id="form-location" class="uk-width-1-1" type="text" placeholder="{{ 'Enter Location' | trans }}" v-model="event.location" >
-                </div>
-            </div>
+                    <div class="uk-form-row">
+                        <span class="uk-form-label">{{ 'Start time' | trans }}:</span>
+                        <div class="uk-form-controls">
+                            <input-date :datetime.sync="event.start"></input-date>
+                        </div>
+                    </div>
 
-            <div class="uk-form-row">
-                <label for="form-description" class="uk-form-label">{{ 'Description' | trans }}</label>
-                <div class="uk-form-controls">
-                    <v-editor id="form-description" :value.sync="event.description" :options="{markdown : post.data.markdown, height: 250}"></v-editor>
+                    <div class="uk-form-row">
+                        <span class="uk-form-label">{{ 'End time' | trans }}:</span>
+                        <div class="uk-form-controls">
+                            <input-date :datetime.sync="event.end"></input-date>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-row">
+                        <span class="uk-form-label">{{ 'Options' | trans }}</span>
+                        <div class="uk-form-controls">
+                            <label>
+                                <input type="checkbox" v-model="event.active" value="1">
+                                {{ 'Published' | trans }}
+                            </label><br>
+                            <label>
+                                <input type="checkbox" v-model="event.data.fbcomments">
+                                {{ 'Allow Facebook comments' | trans }}
+                            </label><br>
+                            <!--                    <label>-->
+                            <!--                        <input type="checkbox" v-model="event.map">-->
+                            <!--                        {{ 'Show Map' | trans }}-->
+                            <!--                    </label><br>-->
+                            <label v-show="repeat.show" :class="{'uk-text-muted': repeat.hasId}">
+                                <input type="checkbox" v-model="repeat.repeating" :disabled="repeat.hasId" value="1">
+                                {{ 'Repeating event' | trans }}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-row" v-show="repeat.repeating">
+                        <span class="uk-form-label">{{ 'Every number of days' | trans }}</span>
+                        <input id="location" class="uk-width-1-1" type="number" min="1" v-model="repeat.interval">
+                    </div>
                 </div>
+
             </div>
         </div>
 
-        <div class="pk-width-sidebar">
-            <div class="uk-form-row">
-                <label for="form-facebook" class="uk-form-label">{{ 'Facebook event link' | trans }}:</label>
-                <div class="uk-form-controls">
-                    <input id="form-facebook" class="uk-width-1-1" type="text" v-model="event.fb_event">
-                </div>
-            </div>
+        <div>
+            <div class="uk-form-horizontal" data-uk-grid-margin>
 
-            <div class="uk-form-row">
-                <span class="uk-form-label">{{ 'Start time' | trans }}:</span>
-                <div class="uk-form-controls">
-                    <input-date :datetime.sync="event.start"></input-date>
-                </div>
-            </div>
-
-            <div class="uk-form-row">
-                <span class="uk-form-label">{{ 'End time' | trans }}:</span>
-                <div class="uk-form-controls">
-                    <input-date :datetime.sync="event.end"></input-date>
-                </div>
-            </div>
-
-            <div class="uk-form-row">
-                <span class="uk-form-label">{{ 'Options' | trans }}</span>
-                <div class="uk-form-controls">
-                    <label>
-                        <input type="checkbox" v-model="event.active" value="1">
-                        {{ 'Published' | trans }}
-                    </label><br>
-<!--                    <label>-->
-<!--                        <input type="checkbox" v-model="event.map">-->
-<!--                        {{ 'Show Map' | trans }}-->
-<!--                    </label><br>-->
-                    <label v-show="repeat.show" :class="{'uk-text-muted': repeat.hasId}">
-                        <input type="checkbox" v-model="repeat.repeating" :disabled="repeat.hasId" value="1">
-                        {{ 'Repeating event' | trans }}
+                <div class="uk-form-row">
+                    <label for="og-title" class="uk-form-label">
+                        {{ 'Title' | trans }}
                     </label>
+                    <div class="uk-form-controls">
+                        <input id="og-title" type="text" class="uk-form-width-large"
+                               placeholder="{{ 'Enter Title' | trans }}" v-model="event.data.og.title">
+                    </div>
                 </div>
-            </div>
 
-            <div class="uk-form-row" v-show="repeat.repeating">
-                <span class="uk-form-label">{{ 'Every number of days' | trans }}</span>
-                <input id="location" class="uk-width-1-1" type="number" min="1" v-model="repeat.interval">
+                <div class="uk-form-row">
+                    <label for="og-description" class="uk-form-label">
+                        {{ 'Description' | trans }}
+                    </label>
+                    <div class="uk-form-controls">
+                        <textarea type="text" id="og-description" type="text" class="uk-form-width-large" rows="5"
+                                  placeholder="{{ 'Enter description' | trans }}" v-model="event.data.og.description"></textarea>
+                    </div>
+                </div>
+
+                <div class="uk-form-row">
+                    <label for="og-description" class="uk-form-label">
+                        {{ 'Image' | trans }}
+                    </label>
+                    <div class="uk-form-controls uk-form-width-large">
+                        <input-image-meta :image.sync="event.data.og.image" class="pk-image-max-height"></input-image-meta>
+                    </div>
+                </div>
+
+
             </div>
         </div>
-
     </div>
+
 </div>

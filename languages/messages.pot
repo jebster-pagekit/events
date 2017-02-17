@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 1.0.11 (jebster/events, messages)\n"
-"POT-Creation-Date: 2017-02-08 23:37+0000\n"
+"POT-Creation-Date: 2017-02-17 22:21+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,6 +39,9 @@ msgstr ""
 msgid "Max events in list"
 msgstr ""
 
+msgid "Front end style"
+msgstr ""
+
 msgid "Events"
 msgstr ""
 
@@ -48,19 +51,31 @@ msgstr ""
 msgid "Add Event"
 msgstr ""
 
-msgid "Status"
-msgstr ""
-
 msgid "Start time"
 msgstr ""
 
 msgid "End time"
 msgstr ""
 
-msgid "Repeating Events"
+msgid "No events found."
 msgstr ""
 
 msgid "Interval"
+msgstr ""
+
+msgid "{0} %count% Events|{1} %count% Event|]1,Inf[ %count% Events"
+msgstr ""
+
+msgid "{1} %count% Event selected|]1,Inf[ %count% Events selected"
+msgstr ""
+
+msgid "{0} %rcount% Events|{1} %rcount% Event|]1,Inf[ %rcount% Events"
+msgstr ""
+
+msgid "Delete Events?"
+msgstr ""
+
+msgid "Status"
 msgstr ""
 
 msgid "Edit %eventTitle%"
@@ -76,6 +91,9 @@ msgid "Close"
 msgstr ""
 
 msgid "Delete"
+msgstr ""
+
+msgid "Meta"
 msgstr ""
 
 msgid "Title"
@@ -99,10 +117,16 @@ msgstr ""
 msgid "Published"
 msgstr ""
 
+msgid "Allow Facebook comments"
+msgstr ""
+
 msgid "Repeating event"
 msgstr ""
 
 msgid "Every number of days"
+msgstr ""
+
+msgid "Image"
 msgstr ""
 
 msgid "Saved"
@@ -249,13 +273,16 @@ msgstr ""
 msgid "Saturday"
 msgstr ""
 
-msgid "Deleted."
+msgid "Filter by"
 msgstr ""
 
-msgid "Something went wrong, please contact support."
+msgid "Events deleted."
 msgstr ""
 
 msgid "Saved."
+msgstr ""
+
+msgid "Something went terribly wrong"
 msgstr ""
 
 msgid "Today"
@@ -276,6 +303,12 @@ msgstr ""
 msgid "All day"
 msgstr ""
 
+msgid "Event not found."
+msgstr ""
+
+msgid "Event not found"
+msgstr ""
+
 msgid "Event Settings"
 msgstr ""
 
@@ -283,5 +316,8 @@ msgid "New event"
 msgstr ""
 
 msgid "Edit '%eventTitle%'"
+msgstr ""
+
+msgid "Unpublished"
 msgstr ""
 

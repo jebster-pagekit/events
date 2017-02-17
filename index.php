@@ -20,6 +20,12 @@ return [
         'events' => [
             'path' => '/events',
             'controller' => 'Jebster\\Events\\Controller\\EventsFrontController'
+        ],
+        'api' => [
+            'path' => '/api',
+            'controller' => [
+                'Jebster\\Events\\Controller\\EventApiController'
+            ]
         ]
     ],
 

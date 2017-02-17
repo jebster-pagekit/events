@@ -41,14 +41,23 @@ class EventsFrontController
         $event = Event::find($id);
         if($event == null || !$event->active)
             App::abort(404, __('Event not found'));
+
+        $view = ['title' => $event->title, 'name' => 'events:views/frontend/event.php'];
+
+        if($event->get('og') != null){
+            $og = $event->get('og');
+            if(key_exists('title', $og)) $view['og:title'] = $og['title'];
+            if(key_exists('description', $og)) $view['og:description'] = $og['description'];
+            if(key_exists('image', $og) && key_exists('src', $og['image']) && strlen($og['image']['src']) > 1)
+                $view['og:image'] = App::url()->getStatic($og['image']['src'], [], 0);
+        }
+
         return [
-            '$view' => [
-                'title' => $event->title,
-                'name' => 'events:views/frontend/event.php'
-            ],
+            '$view' => $view,
             '$data' => [
                 'event' => $event
-            ]
+            ],
+            'event' => $event
         ];
     }
 

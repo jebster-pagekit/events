@@ -21,9 +21,9 @@ return [
                 $table->addColumn('map', 'boolean');
                 $table->addColumn('start', 'datetime');
                 $table->addColumn('end', 'datetime');
-                $table->addColumn('fb_event', 'string', ['length' => 511, 'default' => '']);
                 $table->addColumn('active', 'boolean');
                 $table->addColumn('repeating', 'integer', ['length' => 10, 'notnull' => false, 'default' => null]);
+                $table->addColumn('data', 'json_array', ['notnull' => false]);
 
                 $table->setPrimaryKey(['id']);
             });

@@ -1,25 +1,20 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: jeggy
- * Date: 1/24/17
- * Time: 10:16 PM
- */
-
 namespace Jebster\Events\Model;
 
 use DateInterval;
 use DateTime;
+use JsonSerializable;
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\Application as App;
+use Pagekit\System\Model\DataModelTrait;
 
 /**
  * @Entity(tableClass="@jebster_event")
  */
-class Event
+class Event implements JsonSerializable
 {
-    use ModelTrait;
+    use ModelTrait, DataModelTrait;
 
     /** @Column(type="integer") @Id */
     public $id;
@@ -51,14 +46,16 @@ class Event
     /** @Column(type="datetime") */
     public $end;
 
-    /** @Column */
-    public $fb_event = '';
-
     /** @Column(type="boolean") */
     public $active = true;
 
     /** @Column(type="integer") */
     public $repeating = null;
+
+
+    public static function getEventsOnly(){
+
+    }
 
     public static function getEvents($from, $to, $count = 10){
         // TODO: redo this method, so it's cleaner and faster.
@@ -128,7 +125,68 @@ class Event
         return self::getEvents(new DateTime(), null, $count);
     }
 
+    public static function eventsOnly($filter, $page){
+        return static::querying($filter, $page, 'repeating is null');
+    }
 
+    public static function repeatingOnly($filter, $page){
+        return static::querying($filter, $page, 'repeating is not null');
+    }
+
+    protected static function querying($filter, $page, $where)
+    {
+        $query  = static::query();
+        $filter = array_merge(array_fill_keys(['search', 'active', 'order', 'limit'], ''), $filter);
+
+        extract($filter, EXTR_SKIP);
+
+//        if(!App::user()->hasAccess('blog: manage all posts')) {
+//            $author = App::user()->id;
+//        }
+
+        if (is_numeric($active)) {
+            $query->where(['active' => (int) $active]);
+        }
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->orWhere(['title LIKE :search'], ['search' => "%{$search}%"]);
+            });
+        }
+
+        if($where){
+            $query->where($where);
+        }
+
+        if (!preg_match('/^(title|location|start|end|)\s(asc|desc)$/i', $order, $order)) {
+            $order = [1 => 'start', 2 => 'desc'];
+        }
+
+
+
+        $limit = (int) $limit ?: 10; //App::module('blog')->config('posts.posts_per_page');
+        $count = $query->count();
+        $pages = ceil($count / $limit);
+        $page  = max(0, min($pages - 1, $page));
+
+//        $posts = array_values($query->offset($page * $limit)->related('user', 'comments')->limit($limit)->orderBy($order[1], $order[2])->get());
+
+        $events = array_values($query
+            ->offset($page * $limit)
+            ->limit($limit)
+            ->orderBy($order[1], $order[2])
+            ->get());
+
+        return compact('events', 'pages', 'count');
+    }
+
+    public static function getStatuses()
+    {
+        return [
+            1 => __('Published'),
+            false => __('Unpublished'),
+        ];
+    }
 
     function __clone()
     {

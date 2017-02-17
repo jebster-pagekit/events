@@ -4,7 +4,18 @@ $view->script('utils', 'events:js/utils.js', 'vue');
 $view->script('event', 'events:js/frontend/event.js', ['vue', 'moment', 'utils']);
 
 $view->style('font-awesome', 'events:assets/css/libraries/font-awesome.min.css');
+
+$url = 'http://'.$_SERVER['HTTP_HOST'].'/events/'.$event->id;
+
 ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fo_FO/all.js#xfbml=1"; // &appId=
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 <div id="event">
 <br>
     <div class="row">
@@ -38,25 +49,28 @@ $view->style('font-awesome', 'events:assets/css/libraries/font-awesome.min.css')
                                 <td>{{ event.end }}</td>
                             </tr>
                             <tr>
-                                <td colspan="2">{{ event.description }}</td>
+                                <td colspan="2">{{{ event.description }}}</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
 
+                    <?php if($image = $event->get('image')): ?>
                     <div class="col-md-4 col-lg-4 " align="center">
-                        <img alt="User Pic" src="http://i2.cdn.cnn.com/cnnnext/dam/assets/161127012658-google-maps-dump-tower-large-169.jpg" class="img-responsive">
+                        <img alt="<?php $image['alt'] ?>" src="<?= Pagekit\Application::url()->getStatic($image['src'], [], 0) ?>" class="img-responsive"><br><br>
                     </div>
+                    <?php endif; ?>
 
                 </div>
             </div>
-            <div class="panel-footer">
-                <a class="btn btn-sm btn-danger pull-right" data-original-title="Broadcast Message" data-toggle="tooltip" type="button">
-<!--                    <i class="glyphicon glyphicon-share-alt"></i>--><i class="fa fa-share" aria-hidden="true"></i>
-                </a>
-                Facebook Comments?
-                <br><br>
-            </div>
+            <?php if($event->get('fbcomments')): ?>
+                <div class="panel-footer">
+                    <div class="fb-like pull-right-only" data-href="<?= $url ?>" data-width="320" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+                    <br>
+                    <div class="fb-comments" data-href="<?= $url ?>" data-width="480" data-num-posts="10">Comments</div>
+                    <br><br>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 
