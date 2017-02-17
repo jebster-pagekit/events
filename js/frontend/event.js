@@ -12,9 +12,9 @@ $(function(){
                 var e = this.ev;
 
                 if(e.repeating){
-                    e.date = intervalDisplay(this, e.start.date, e.repeating);
+                    e.date = intervalDisplay(this, e.start, e.repeating);
                 }else{
-                    var m = moment(e.start.date);
+                    var m = moment(e.start);
 
                     e.date = displayDay(this, m.weekday(), false);
                     e.date += ' '+m.format('D');
@@ -23,8 +23,8 @@ $(function(){
 
                 }
 
-                e.start = moment(e.start.date).format('HH:mm');
-                e.end = moment(e.end.date).format('HH:mm');
+                e.start = moment(e.start).format('HH:mm');
+                e.end = moment(e.end).format('HH:mm');
 
                 return e;
             }

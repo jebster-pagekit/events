@@ -32,6 +32,7 @@ $(function(){
                     nextYear: 'seek-next'
                 },
                 // Locale
+                timezone: 'local',
                 firstDay: 1,
                 views: {
                     basic: {
@@ -109,8 +110,6 @@ $(function(){
                 this.events = [];
                 for(var i = 0; i < this.ev.length; i++){
                     var e = this.ev[i];
-                    e.start = e.start.date;
-                    e.end = e.end.date;
                     e.url = 'events/'+e.id;
                     e.color = '#c00';
                     this.events.push(e);
