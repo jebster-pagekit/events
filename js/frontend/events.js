@@ -31,6 +31,9 @@ $(function(){
                     prevYear: 'seek-prev',
                     nextYear: 'seek-next'
                 },
+
+                defaultView: 'listWeek',
+
                 // Locale
                 timezone: 'local',
                 firstDay: 1,
@@ -110,7 +113,7 @@ $(function(){
                 this.events = [];
                 for(var i = 0; i < this.ev.length; i++){
                     var e = this.ev[i];
-                    e.url = 'events/'+e.id;
+                    e.url = '/events/'+e.slug;
                     e.color = '#c00';
                     this.events.push(e);
                 }

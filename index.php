@@ -9,7 +9,8 @@ return [
         'Jebster\\Events\\' => 'src'
     ],
     'resources' => [
-        'events:' => ''
+        'events:' => '',
+        'events2:' => 'test'
     ],
 
     'routes' => [

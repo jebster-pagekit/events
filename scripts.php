@@ -14,6 +14,7 @@ return [
             $util->createTable('@jebster_event', function($table){
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('title', 'string', ['length' => 255, 'default' => '']);
+                $table->addColumn('slug', 'string', ['length' => 255]);
                 $table->addColumn('description', 'text');
                 $table->addColumn('short_description', 'text');
                 $table->addColumn('creator_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
@@ -26,6 +27,7 @@ return [
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
 
                 $table->setPrimaryKey(['id']);
+                $table->addUniqueIndex(['slug'], '@BLOG_POST_SLUG');
             });
         }
     }

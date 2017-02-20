@@ -14,13 +14,16 @@ use Pagekit\System\Model\DataModelTrait;
  */
 class Event implements JsonSerializable
 {
-    use ModelTrait, DataModelTrait;
+    use EventModelTrait, DataModelTrait;
 
     /** @Column(type="integer") @Id */
     public $id;
 
     /** @Column */
     public $title = '';
+
+    /** @Column */
+    public $slug = '';
 
     /** @Column(type="text") */
     public $short_description = '';
@@ -54,7 +57,7 @@ class Event implements JsonSerializable
 
 
     public static function getEventsOnly(){
-
+        echo "This ever running?";
     }
 
     public static function getEvents($from, $to, $count = 10){

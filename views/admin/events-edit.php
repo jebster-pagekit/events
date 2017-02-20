@@ -98,6 +98,13 @@ $view->script('event', 'events:js/events-edit.js', ['vue', 'vue-router', 'VueRou
                     </div>
 
                     <div class="uk-form-row">
+                        <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
+                        <div class="uk-form-controls">
+                            <input id="form-slug" type="text" class="uk-width-1-1" placeholder="{{ 'Auto from title' | trans }}" v-model="event.slug">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-row">
                         <span class="uk-form-label">{{ 'Start time' | trans }}:</span>
                         <div class="uk-form-controls">
                             <input-date :datetime.sync="event.start"></input-date>

@@ -27,7 +27,7 @@ $view->script('eventList', 'events:js/eventListWidget.js', ['utils', 'vue', 'mom
         <div><?= __('No future events') ?></div>
     <?php endif; ?>
     <div class="jebster_event" v-for="event in events">
-        <a href="/events/{{event.id}}" class="jebster_event_link">
+        <a href="/events/{{event.link}}" class="jebster_event_link">
             <div class="jebster_image">
                 <div class="jebster_calendar_icon"></div>
                 <span class="jebster_month">

@@ -14,6 +14,8 @@ $(function(){
 
                     e.time_interval = moment(e.start).format('HH:mm');
 
+                    e.link = e.slug;
+
                     evs.push(e);
                 }
                 return evs;

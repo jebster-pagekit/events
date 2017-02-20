@@ -112,6 +112,10 @@ class EventsController
             $event['creator_id'] = $ev->creator_id;
         }
 
+        if (!$event['slug'] = App::filter($event['slug'] ?: $event['title'], 'slugify')) {
+            App::abort(400, __('Invalid slug.'));
+        }
+
         $ev->save($event);
 
         return ['message' => 'success', 'event' => $ev];

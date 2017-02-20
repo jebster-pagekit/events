@@ -35,10 +35,10 @@ class EventsFrontController
     }
 
     /**
-     * @Route("/{id}", requirements={"id"="\d+"}, methods="GET")
+     * @Route("/{slug}", methods="GET")
      */
-    public function eventAction($id = 0){
-        $event = Event::find($id);
+    public function eventAction($slug = 0){
+        $event = Event::findFromSlug($slug);
         if($event == null || !$event->active)
             App::abort(404, __('Event not found'));
 
