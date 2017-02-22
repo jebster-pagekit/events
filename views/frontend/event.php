@@ -7,6 +7,9 @@ $view->style('font-awesome', 'events:assets/css/libraries/font-awesome.min.css')
 
 $url = 'http://'.$_SERVER['HTTP_HOST'].'/events/'.$event->id;
 
+
+$size = (($image = $event->get('image')) && strlen($image['src']) > 1) ? 8 : 12;
+
 ?>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -29,7 +32,7 @@ $url = 'http://'.$_SERVER['HTTP_HOST'].'/events/'.$event->id;
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class=" col-md-8 col-lg-8 ">
+                    <div class=" col-md-<?= $size ?> col-lg-<?= $size ?> ">
                         <table class="table table-user-information">
                             <tbody>
                             <tr>
@@ -55,7 +58,7 @@ $url = 'http://'.$_SERVER['HTTP_HOST'].'/events/'.$event->id;
                         </table>
                     </div>
 
-                    <?php if($image = $event->get('image')): ?>
+                    <?php if($size != 12): ?>
                     <div class="col-md-4 col-lg-4 " align="center">
                         <img alt="<?php $image['alt'] ?>" src="<?= Pagekit\Application::url()->getStatic($image['src'], [], 0) ?>" class="img-responsive"><br><br>
                     </div>
