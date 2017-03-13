@@ -1,9 +1,9 @@
 <?php
 
-$view->script('moment', 'events:assets/js/libraries/moment.min.js');
-$view->script('full-calendar', 'events:assets/js/libraries/fullcalendar.min.js', 'jquery');
+$view->script('moment', 'events:assets/js/libraries/moment.min.js', 'jquery');
+$view->script('full-calendar', 'events:assets/js/libraries/fullcalendar.min.js', 'moment');
 
-$view->script('events', 'events:js/frontend/events.js', ['vue', 'moment', 'full-calendar']);
+$view->script('events', 'events:js/frontend/events.js', ['vue', 'full-calendar', 'moment','jquery']);
 
 $view->style('jquery-ui', 'events:assets/css/libraries/jquery-ui.min.css');
 $view->style('jquery-ui-structure', 'events:assets/css/libraries/jquery-ui.structure.min.css');

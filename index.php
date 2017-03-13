@@ -68,5 +68,11 @@ return [
     ],
 
 
+    'events' => [
+        'view.scripts' => function ($event, $scripts) use ($app) {
+			$scripts->register('link-events', 'events:app/bundle/link-events.js', '~panel-link');
+		},
+    ],
+
     'settings' => '@events/settings',
 ];

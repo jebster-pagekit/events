@@ -129,10 +129,6 @@ $view->script('event', 'events:js/events-edit.js', ['vue', 'vue-router', 'VueRou
                                 <input type="checkbox" v-model="event.data.fbcomments">
                                 {{ 'Allow Facebook comments' | trans }}
                             </label><br>
-                            <!--                    <label>-->
-                            <!--                        <input type="checkbox" v-model="event.map">-->
-                            <!--                        {{ 'Show Map' | trans }}-->
-                            <!--                    </label><br>-->
                             <label v-show="repeat.show" :class="{'uk-text-muted': repeat.hasId}">
                                 <input type="checkbox" v-model="repeat.repeating" :disabled="repeat.hasId" value="1">
                                 {{ 'Repeating event' | trans }}

@@ -108,4 +108,13 @@ class EventApiController
 
         return ['message' => 'success'];
     }
+
+
+    /**
+     * @Route("/form", methods="GET")
+     */
+    public function formAction()
+    {
+        return json_decode(json_encode(Event::findAll()), true);
+    }
 }

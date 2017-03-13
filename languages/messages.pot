@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 1.0.11 (jebster/events, messages)\n"
-"POT-Creation-Date: 2017-02-17 22:21+0000\n"
+"POT-Creation-Date: 2017-03-08 17:01+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,6 +109,12 @@ msgid "Location"
 msgstr ""
 
 msgid "Description"
+msgstr ""
+
+msgid "Slug"
+msgstr ""
+
+msgid "Auto from title"
 msgstr ""
 
 msgid "Options"
@@ -316,6 +322,9 @@ msgid "New event"
 msgstr ""
 
 msgid "Edit '%eventTitle%'"
+msgstr ""
+
+msgid "Invalid slug."
 msgstr ""
 
 msgid "Unpublished"

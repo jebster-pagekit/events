@@ -1,5 +1,5 @@
 .jebster_event_list{
-
+    line-height: 1.2;
 }
 
 .jebster_event{
@@ -8,26 +8,21 @@
     height: 80px;
 }
 
-.jebster_event .jebster_image{
+.jebster_event .jebster_icon{
     position: relative;
+    padding: 4px 0 0 2px;
     float: left;
-    width: 56px;
-    height: 56px;
 }
 
 .jebster_calendar_icon{
     width: 58px;
     height: 58px;
-    border: 5px solid #BA0000;
     border-radius: 10px;
-    margin: 4px 0 0 2px;
 }
 
 .jebster_calendar_icon::before{
     position: absolute;
-    border: 5px solid #BA0000;
     border-radius: 10px 10px 0 0;
-    background-color: #BA0000;
     height: 18px;
     width: 58px;
     top: 4px;
@@ -55,27 +50,21 @@
     margin-bottom: 2px;
 }
 
-.jebster_event:nth-child(even){
-    background-color: #fff;
-}
-
-.jebster_event:nth-child(odd){
-    background-color: #f1f1f1;
-}
-
 span.jebster_month{
     position: absolute;
     top: 5px;
-    left: 20px;
-    color: white;
+    left: 1px;
+    width: 100%;
+    color: #fff;
     font-size: 13px;
     font-weight:bold;
 }
 
 span.jebster_dayNumber{
     position: absolute;
-    top: 28px;
-    left: 20px;
+    top: 24px;
+    left: 1px;
+    width: 100%;
     font-size: 18px;
     font-weight:bold;
 }
@@ -83,7 +72,8 @@ span.jebster_dayNumber{
 span.jebster_dayName{
     position: absolute;
     top: 42px;
-    left: 21px;
+    left: 1px;
+    width: 100%;
     font-size: 12px;
 }
 
@@ -91,8 +81,9 @@ span.jebster_onedigit{
     left: 26px;
 }
 
+
 .jebster_event_link{
-    color: black;
+    color: #000;
     text-decoration: none;
 }
 
