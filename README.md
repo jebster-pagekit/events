@@ -1,3 +1,3 @@
 # events
 
-Project moved to GitLab: https://gitlab.com/jebster/events
+Project moved to GitLab: https://gitlab.com/jebster/pagekit/events
